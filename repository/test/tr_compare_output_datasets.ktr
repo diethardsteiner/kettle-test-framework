@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>tr_import_input_dataset</name>
+    <name>tr_compare_output_datasets &#x28;After injection&#x29;</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -67,59 +67,17 @@
     <clusterschemas>
     </clusterschemas>
   <created_user>-</created_user>
-  <created_date>2013&#x2f;07&#x2f;17 21&#x3a;42&#x3a;34.074</created_date>
+  <created_date>2013&#x2f;07&#x2f;21 09&#x3a;20&#x3a;26.160</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2013&#x2f;07&#x2f;17 21&#x3a;42&#x3a;34.074</modified_date>
+  <modified_date>2013&#x2f;07&#x2f;21 09&#x3a;20&#x3a;26.160</modified_date>
   </info>
   <notepads>
     <notepad>
-      <note>CSV was chosen as it can be easily opened by spreadsheet apps &#xa;and also read via command line utilties.</note>
-      <xloc>92</xloc>
-      <yloc>37</yloc>
-      <width>397</width>
-      <heigth>42</heigth>
-      <fontname>Arial</fontname>
-      <fontsize>10</fontsize>
-      <fontbold>N</fontbold>
-      <fontitalic>N</fontitalic>
-      <fontcolorred>0</fontcolorred>
-      <fontcolorgreen>0</fontcolorgreen>
-      <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>165</backgroundcolorgreen>
-      <backgroundcolorblue>0</backgroundcolorblue>
-      <bordercolorred>100</bordercolorred>
-      <bordercolorgreen>100</bordercolorgreen>
-      <bordercolorblue>100</bordercolorblue>
-      <drawshadow>Y</drawshadow>
-    </notepad>
-    <notepad>
-      <note>Do not specify output fields&#xa;as we want to be flexible</note>
-      <xloc>485</xloc>
-      <yloc>117</yloc>
-      <width>170</width>
-      <heigth>42</heigth>
-      <fontname>Arial</fontname>
-      <fontsize>10</fontsize>
-      <fontbold>N</fontbold>
-      <fontitalic>N</fontitalic>
-      <fontcolorred>0</fontcolorred>
-      <fontcolorgreen>0</fontcolorgreen>
-      <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>165</backgroundcolorgreen>
-      <backgroundcolorblue>0</backgroundcolorblue>
-      <bordercolorred>100</bordercolorred>
-      <bordercolorgreen>100</bordercolorgreen>
-      <bordercolorblue>100</bordercolorblue>
-      <drawshadow>Y</drawshadow>
-    </notepad>
-    <notepad>
-      <note>QA&#x3a;</note>
-      <xloc>93</xloc>
-      <yloc>256</yloc>
-      <width>33</width>
-      <heigth>26</heigth>
+      <note>Unfortunately the &#x22;Merge Rows &#x28;diff&#x29;&#x22; step &#xa;does not support metadata injection yet, so&#xa;we have to work around this. &#x28;pdi-ce-4.4.0-stable&#x29;&#xa;&#x22;Add checksum&#x22; neither.&#xa;&#x3d;&#x3e; Alternative approach&#x3a; just sort the datasets and&#xa;output them and use the &#x22;File compare&#x22; job entry.</note>
+      <xloc>404</xloc>
+      <yloc>10</yloc>
+      <width>305</width>
+      <heigth>106</heigth>
       <fontname>Arial</fontname>
       <fontsize>10</fontsize>
       <fontbold>N</fontbold>
@@ -205,13 +163,17 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>CSV file input</from><to>Table output</to><enabled>Y</enabled> </hop>
-  <hop> <from>Generate Rows</from><to>Get Variables</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Variables</from><to>Write to log</to><enabled>Y</enabled> </hop>
+  <hop> <from>Input main output</from><to>Sort main output</to><enabled>Y</enabled> </hop>
+  <hop> <from>Input golden dataset</from><to>Sort golden dataset</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sort main output</from><to>Merge Rows &#x28;diff&#x29;</to><enabled>N</enabled> </hop>
+  <hop> <from>Sort golden dataset</from><to>Merge Rows &#x28;diff&#x29;</to><enabled>N</enabled> </hop>
+  <hop> <from>Sort main output</from><to>Add a checksum</to><enabled>N</enabled> </hop>
+  <hop> <from>Sort golden dataset</from><to>Output sorted golden ds</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sort main output</from><to>Output sorted main ds</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>CSV file input</name>
-    <type>CsvInput</type>
+    <name>Add a checksum</name>
+    <type>CheckSum</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -220,32 +182,106 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <filename/>
-    <filename_field/>
-    <rownum_field/>
-    <include_filename>N</include_filename>
+      <checksumtype>CRC32</checksumtype>
+      <resultfieldName>checksum</resultfieldName>
+      <resultType>hexadecimal</resultType>
+      <compatibilityMode>N</compatibilityMode>
+    <fields>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>336</xloc>
+      <yloc>4</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Input golden dataset</name>
+    <type>TextFileInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <accept_filenames>N</accept_filenames>
+    <passing_through_fields>N</passing_through_fields>
+    <accept_field/>
+    <accept_stepname/>
     <separator>&#x3b;</separator>
     <enclosure>&#x22;</enclosure>
+    <enclosure_breaks>N</enclosure_breaks>
+    <escapechar/>
     <header>Y</header>
-    <buffer_size>50000</buffer_size>
-    <lazy_conversion>Y</lazy_conversion>
-    <add_filename_result>N</add_filename_result>
-    <parallel>N</parallel>
-    <newline_possible>N</newline_possible>
+    <nr_headerlines>1</nr_headerlines>
+    <footer>N</footer>
+    <nr_footerlines>1</nr_footerlines>
+    <line_wrapped>N</line_wrapped>
+    <nr_wraps>1</nr_wraps>
+    <layout_paged>N</layout_paged>
+    <nr_lines_per_page>80</nr_lines_per_page>
+    <nr_lines_doc_header>0</nr_lines_doc_header>
+    <noempty>Y</noempty>
+    <include>N</include>
+    <include_field/>
+    <rownum>N</rownum>
+    <rownumByFile>N</rownumByFile>
+    <rownum_field/>
+    <format>DOS</format>
     <encoding/>
+    <add_to_result_filenames>Y</add_to_result_filenames>
+    <file>
+      <name/>
+      <filemask/>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+      <type>CSV</type>
+      <compression>None</compression>
+    </file>
+    <filters>
+    </filters>
     <fields>
     </fields>
+    <limit>0</limit>
+    <error_ignored>N</error_ignored>
+    <skip_bad_files>N</skip_bad_files>
+    <file_error_field/>
+    <file_error_message_field/>
+    <error_line_skipped>N</error_line_skipped>
+    <error_count_field/>
+    <error_fields_field/>
+    <error_text_field/>
+    <bad_line_files_destination_directory/>
+    <bad_line_files_extension>warning</bad_line_files_extension>
+    <error_line_files_destination_directory/>
+    <error_line_files_extension>error</error_line_files_extension>
+    <line_number_files_destination_directory/>
+    <line_number_files_extension>line</line_number_files_extension>
+    <date_format_lenient>Y</date_format_lenient>
+    <date_format_locale>en_US</date_format_locale>
+    <shortFileFieldName/>
+    <pathFieldName/>
+    <hiddenFieldName/>
+    <lastModificationTimeFieldName/>
+    <uriNameFieldName/>
+    <rootUriNameFieldName/>
+    <extensionFieldName/>
+    <sizeFieldName/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>97</xloc>
-      <yloc>121</yloc>
+      <xloc>138</xloc>
+      <yloc>222</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Generate Rows</name>
-    <type>RowGenerator</type>
+    <name>Input main output</name>
+    <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -254,24 +290,24 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <fields>
-    </fields>
-    <limit>1</limit>
-    <never_ending>N</never_ending>
-    <interval_in_ms/>
-    <row_time_field/>
-    <last_time_field/>
+    <connection>project_output_db_connection</connection>
+    <sql>SELECT &#x2a; FROM &#x24;&#x7b;VAR_LOCAL_FULL_TABLE_NAME&#x7d;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>96</xloc>
-      <yloc>305</yloc>
+      <xloc>134</xloc>
+      <yloc>80</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Get Variables</name>
-    <type>GetVariable</type>
+    <name>Merge Rows &#x28;diff&#x29;</name>
+    <type>MergeRows</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -280,55 +316,26 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <fields>
-      <field>
-        <name>db_schema_name</name>
-        <variable>&#x24;&#x7b;VAR_LOCAL_DB_SCHEMA_NAME&#x7d;</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>jndi_name</name>
-        <variable>&#x24;&#x7b;VAR_JNDI_NAME&#x7d;</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>table_name</name>
-        <variable>&#x24;&#x7b;VAR_LOCAL_TABLE_NAME&#x7d;</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
+    <keys>
+    </keys>
+    <values>
+    </values>
+<flag_field>flagfield</flag_field>
+<reference/>
+<compare/>
+    <compare>
+    </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>260</xloc>
-      <yloc>305</yloc>
+      <xloc>438</xloc>
+      <yloc>159</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Table output</name>
-    <type>TableOutput</type>
+    <name>Output sorted golden ds</name>
+    <type>TextFileOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -337,36 +344,50 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>project_dynamic_db_connection</connection>
-    <schema>&#x24;&#x7b;VAR_LOCAL_DB_SCHEMA_NAME&#x7d;</schema>
-    <table>&#x24;&#x7b;VAR_LOCAL_TABLE_NAME&#x7d;</table>
-    <commit>1000</commit>
-    <truncate>Y</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>N</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
+    <separator>&#x3b;</separator>
+    <enclosure>&#x22;</enclosure>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>Y</header>
+    <footer>N</footer>
+    <format>UNIX</format>
+    <compression>None</compression>
+    <encoding>UTF-8</encoding>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>&#x24;&#x7b;java.io.tmpdir&#x7d;&#x2f;kettle-test&#x2f;&#x24;&#x7b;VAR_LOCAL_PROCESS_NAME&#x7d;&#x2f;&#x24;&#x7b;VAR_LOCAL_TEST_CASE_NAME&#x7d;&#x2f;&#x24;&#x7b;VAR_LOCAL_TABLE_NAME&#x7d;_golden.csv</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
     <fields>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>389</xloc>
-      <yloc>121</yloc>
+      <xloc>296</xloc>
+      <yloc>297</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Write to log</name>
-    <type>WriteToLog</type>
+    <name>Output sorted main ds</name>
+    <type>TextFileOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -375,26 +396,99 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-      <loglevel>log_level_basic</loglevel>
-      <displayHeader>Y</displayHeader>
-      <limitRows>N</limitRows>
-      <limitRowsNumber>5</limitRowsNumber>
-      <logmessage>&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#xa;Variables passed in&#x3a;</logmessage>
+    <separator>&#x3b;</separator>
+    <enclosure>&#x22;</enclosure>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>Y</header>
+    <footer>N</footer>
+    <format>UNIX</format>
+    <compression>None</compression>
+    <encoding>UTF-8</encoding>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>&#x24;&#x7b;java.io.tmpdir&#x7d;&#x2f;kettle-test&#x2f;&#x24;&#x7b;VAR_LOCAL_PROCESS_NAME&#x7d;&#x2f;&#x24;&#x7b;VAR_LOCAL_TEST_CASE_NAME&#x7d;&#x2f;&#x24;&#x7b;VAR_LOCAL_TABLE_NAME&#x7d;.csv</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>Y</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
     <fields>
-      <field>
-        <name>db_schema_name</name>
-        </field>
-      <field>
-        <name>jndi_name</name>
-        </field>
-      <field>
-        <name>table_name</name>
-        </field>
-      </fields>
+    </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>394</xloc>
-      <yloc>305</yloc>
+      <xloc>457</xloc>
+      <yloc>297</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Sort golden dataset</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>296</xloc>
+      <yloc>222</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Sort main output</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>292</xloc>
+      <yloc>79</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>jb_test_ktr</name>
+  <name>jb_test_case_runner</name>
     <description/>
     <extended_description/>
     <job_version/>
     <job_status>0</job_status>
-  <directory>&#47;</directory>
+  <directory>&#x2f;</directory>
   <created_user>-</created_user>
-  <created_date>2013&#47;07&#47;18 11:19:51.229</created_date>
+  <created_date>2013&#x2f;07&#x2f;18 11&#x3a;19&#x3a;51.229</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2013&#47;07&#47;18 11:19:51.229</modified_date>
+  <modified_date>2013&#x2f;07&#x2f;18 11&#x3a;19&#x3a;51.229</modified_date>
     <parameters>
         <parameter>
             <name>VAR_LOCAL_PROCESS_FILE_NAME</name>
@@ -22,17 +22,56 @@
             <description>name of the process without file extension</description>
         </parameter>
         <parameter>
+            <name>VAR_LOCAL_PROCESS_TYPE</name>
+            <default_value>ktr</default_value>
+            <description>type of process&#x3a; ktr, kjb</description>
+        </parameter>
+        <parameter>
+            <name>VAR_LOCAL_PROJECT_INPUT_DB_SCHEMA_NAME</name>
+            <default_value>test</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>VAR_LOCAL_PROJECT_OUTPUT_DB_SCHEMA_NAME</name>
+            <default_value>test</default_value>
+            <description/>
+        </parameter>
+        <parameter>
             <name>VAR_LOCAL_TEST_CASE_NAME</name>
             <default_value>simpletest</default_value>
             <description>name of test case</description>
         </parameter>
     </parameters>
   <connection>
+    <name>project_dynamic_db_connection</name>
+    <server/>
+    <type>GENERIC</type>
+    <access>, </access>
+    <database>&#x24;&#x7b;VAR_JNDI_NAME&#x7d;</database>
+    <port>1521</port>
+    <username/>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
     <name>project_input_db_connection</name>
     <server/>
     <type>GENERIC</type>
-    <access>JNDI</access>
-    <database>${VAR_PROJECT_INPUT_JNDI_NAME}</database>
+    <access>, </access>
+    <database>&#x24;&#x7b;VAR_PROJECT_INPUT_JNDI_NAME&#x7d;</database>
     <port>1521</port>
     <username/>
     <password>Encrypted </password>
@@ -53,8 +92,8 @@
     <name>project_output_db_connection</name>
     <server/>
     <type>GENERIC</type>
-    <access>JNDI</access>
-    <database>${VAR_PROJECT_OUTPUT_JNDI_NAME}</database>
+    <access>, </access>
+    <database>&#x24;&#x7b;VAR_PROJECT_OUTPUT_JNDI_NAME&#x7d;</database>
     <port>1521</port>
     <username/>
     <password>Encrypted </password>
@@ -79,7 +118,7 @@
 <size_limit_lines/>
 <interval/>
 <timeout_days/>
-<field><id>ID_JOB</id><enabled>Y</enabled><name>ID_JOB</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>JOBNAME</id><enabled>Y</enabled><name>JOBNAME</name></field><field><id>STATUS</id><enabled>Y</enabled><name>STATUS</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>STARTDATE</id><enabled>Y</enabled><name>STARTDATE</name></field><field><id>ENDDATE</id><enabled>Y</enabled><name>ENDDATE</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>DEPDATE</id><enabled>Y</enabled><name>DEPDATE</name></field><field><id>REPLAYDATE</id><enabled>Y</enabled><name>REPLAYDATE</name></field><field><id>LOG_FIELD</id><enabled>Y</enabled><name>LOG_FIELD</name></field></job-log-table>
+<field><id>ID_JOB</id><enabled>Y</enabled><name>ID_JOB</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>JOBNAME</id><enabled>Y</enabled><name>JOBNAME</name></field><field><id>STATUS</id><enabled>Y</enabled><name>STATUS</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>STARTDATE</id><enabled>Y</enabled><name>STARTDATE</name></field><field><id>ENDDATE</id><enabled>Y</enabled><name>ENDDATE</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>DEPDATE</id><enabled>Y</enabled><name>DEPDATE</name></field><field><id>REPLAYDATE</id><enabled>Y</enabled><name>REPLAYDATE</name></field><field><id>LOG_FIELD</id><enabled>Y</enabled><name>LOG_FIELD</name></field><field><id>EXECUTING_SERVER</id><enabled>N</enabled><name>EXECUTING_SERVER</name></field><field><id>EXECUTING_USER</id><enabled>N</enabled><name>EXECUTING_USER</name></field><field><id>START_JOB_ENTRY</id><enabled>N</enabled><name>START_JOB_ENTRY</name></field><field><id>CLIENT</id><enabled>N</enabled><name>CLIENT</name></field></job-log-table>
 <jobentry-log-table><connection/>
 <schema/>
 <table/>
@@ -110,7 +149,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>188</xloc>
+      <xloc>186</xloc>
       <yloc>81</yloc>
       </entry>
     <entry>
@@ -119,7 +158,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${VAR_PROJECT_ROOT_DIR}&#47;repository&#47;main&#47;${VAR_LOCAL_PROCESS_FILE_NAME}</filename>
+      <filename>&#x24;&#x7b;VAR_PROJECT_ROOT_DIR&#x7d;&#x2f;repository&#x2f;main&#x2f;&#x24;&#x7b;VAR_LOCAL_PROCESS_FILE_NAME&#x7d;</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -138,15 +177,16 @@
       <wait_until_finished>Y</wait_until_finished>
       <follow_abort_remote>N</follow_abort_remote>
       <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
       <parameters>        <pass_all_parameters>Y</pass_all_parameters>
             <parameter>            <name>VAR_LOCAL_PROCESS_NAME</name>
             <stream_name/>
-            <value>${VAR_PROCESS_NAME}</value>
+            <value>&#x24;&#x7b;VAR_PROCESS_NAME&#x7d;</value>
             </parameter>      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>124</xloc>
-      <yloc>881</yloc>
+      <xloc>112</xloc>
+      <yloc>633</yloc>
       </entry>
     <entry>
       <name>Success</name>
@@ -155,8 +195,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>194</xloc>
-      <yloc>1364</yloc>
+      <xloc>186</xloc>
+      <yloc>1113</yloc>
       </entry>
     <entry>
       <name>tr_set_test_case_metadata.ktr</name>
@@ -164,7 +204,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${Internal.Job.Filename.Directory}&#47;tr_set_test_case_metadata.ktr</filename>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;tr_set_test_case_metadata.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -183,162 +223,13 @@
       <wait_until_finished>Y</wait_until_finished>
       <follow_abort_remote>N</follow_abort_remote>
       <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
       <parameters>        <pass_all_parameters>Y</pass_all_parameters>
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>196</xloc>
-      <yloc>626</yloc>
-      </entry>
-    <entry>
-      <name>Set test variables</name>
-      <description/>
-      <type>SET_VARIABLES</type>
-      <replacevars>Y</replacevars>
-      <filename>${VAR_PROJECT_ROOT_DIR}&#47;config&#47;test-cases&#47;${VAR_LOCAL_PROCESS_NAME}&#47;test.properties</filename>
-      <file_variable_type>CURRENT_JOB</file_variable_type>
-      <fields>
-      </fields>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
       <xloc>186</xloc>
-      <yloc>156</yloc>
-      </entry>
-    <entry>
-      <name>SQL: Drop input table</name>
-      <description/>
-      <type>SQL</type>
-      <sql>DROP TABLE ${VAR_PROJECT_INPUT_DB_SCHEMA_NAME}.${VAR_INPUT_TABLE_NAME};
-</sql>
-      <useVariableSubstitution>T</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>project_input_db_connection</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>88</xloc>
-      <yloc>314</yloc>
-      </entry>
-    <entry>
-      <name>Table exists</name>
-      <description/>
-      <type>TABLE_EXISTS</type>
-      <tablename>${VAR_INPUT_TABLE_NAME}</tablename>
-      <schemaname>${VAR_PROJECT_INPUT_DB_SCHEMA_NAME}</schemaname>
-      <connection>project_input_db_connection</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>186</xloc>
-      <yloc>240</yloc>
-      </entry>
-    <entry>
-      <name>SQL: Create input table</name>
-      <description/>
-      <type>SQL</type>
-      <sql>
-</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>T</sqlfromfile>
-      <sqlfilename>${VAR_PROJECT_ROOT_DIR}&#47;config&#47;test-cases&#47;${VAR_LOCAL_PROCESS_NAME}&#47;input-table.ddl</sqlfilename>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>project_input_db_connection</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>288</xloc>
-      <yloc>316</yloc>
-      </entry>
-    <entry>
-      <name>SQL: Drop output table</name>
-      <description/>
-      <type>SQL</type>
-      <sql>DROP TABLE ${VAR_PROJECT_OUTPUT_DB_SCHEMA_NAME}.${VAR_OUTPUT_TABLE_NAME};
-</sql>
-      <useVariableSubstitution>T</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>project_output_db_connection</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>88</xloc>
-      <yloc>513</yloc>
-      </entry>
-    <entry>
-      <name>Output Table exists</name>
-      <description/>
-      <type>TABLE_EXISTS</type>
-      <tablename>${VAR_OUTPUT_TABLE_NAME}</tablename>
-      <schemaname>${VAR_PROJECT_OUTPUT_DB_SCHEMA_NAME}</schemaname>
-      <connection>project_output_db_connection</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>188</xloc>
-      <yloc>428</yloc>
-      </entry>
-    <entry>
-      <name>SQL: Create output table</name>
-      <description/>
-      <type>SQL</type>
-      <sql>
-</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>T</sqlfromfile>
-      <sqlfilename>${VAR_PROJECT_ROOT_DIR}&#47;config&#47;test-cases&#47;${VAR_LOCAL_PROCESS_NAME}&#47;output-table.ddl</sqlfilename>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>project_output_db_connection</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>288</xloc>
-      <yloc>512</yloc>
-      </entry>
-    <entry>
-      <name>tr_import_input_dataset_metadata_injection.ktr</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>${Internal.Job.Filename.Directory}&#47;tr_import_input_dataset_metadata_injection.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-            <parameter>            <name>VAR_LOCAL_PROCESS_NAME</name>
-            <stream_name/>
-            <value>${VAR_PROCESS_NAME}</value>
-            </parameter>            <parameter>            <name>VAR_LOCAL_TEST_CASE_NAME</name>
-            <stream_name/>
-            <value>${VAR_TEST_CASE_NAME}</value>
-            </parameter>            <parameter>            <name>VAR_LOCAL_INPUT_TABLE_NAME</name>
-            <stream_name/>
-            <value>${VAR_INPUT_TABLE_NAME}</value>
-            </parameter>      </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>196</xloc>
-      <yloc>737</yloc>
+      <yloc>193</yloc>
       </entry>
     <entry>
       <name>tr_export_output_dataset.ktr</name>
@@ -346,7 +237,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${Internal.Job.Filename.Directory}&#47;tr_export_output_dataset.ktr</filename>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;tr_export_output_dataset.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -365,47 +256,22 @@
       <wait_until_finished>Y</wait_until_finished>
       <follow_abort_remote>N</follow_abort_remote>
       <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
       <parameters>        <pass_all_parameters>Y</pass_all_parameters>
             <parameter>            <name>VAR_LOCAL_OUTPUT_TABLE_NAME</name>
             <stream_name/>
-            <value>${VAR_OUTPUT_TABLE_NAME}</value>
+            <value>&#x24;&#x7b;VAR_OUTPUT_TABLE_NAME&#x7d;</value>
             </parameter>            <parameter>            <name>VAR_LOCAL_PROCESS_NAME</name>
             <stream_name/>
-            <value>${VAR_PROCESS_NAME}</value>
+            <value>&#x24;&#x7b;VAR_PROCESS_NAME&#x7d;</value>
             </parameter>            <parameter>            <name>VAR_LOCAL_TEST_CASE_NAME</name>
             <stream_name/>
-            <value>${VAR_TEST_CASE_NAME}</value>
+            <value>&#x24;&#x7b;VAR_TEST_CASE_NAME&#x7d;</value>
             </parameter>      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>194</xloc>
-      <yloc>1027</yloc>
-      </entry>
-    <entry>
-      <name>File Compare: Output VS Golden Output</name>
-      <description/>
-      <type>FILE_COMPARE</type>
-      <filename1>${VAR_PROJECT_ROOT_DIR}&#47;config&#47;test-cases&#47;${VAR_LOCAL_PROCESS_NAME}&#47;${VAR_LOCAL_TEST_CASE_NAME}&#47;output&#47;dataset.csv</filename1>
-      <filename2>${java.io.tmpdir}&#47;kettle-test&#47;${VAR_LOCAL_PROCESS_NAME}&#47;${VAR_LOCAL_TEST_CASE_NAME}&#47;output-dataset.csv</filename2>
-      <add_filename_result>N</add_filename_result>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>194</xloc>
-      <yloc>1109</yloc>
-      </entry>
-    <entry>
-      <name>Create success file</name>
-      <description/>
-      <type>CREATE_FILE</type>
-      <filename>${java.io.tmpdir}&#47;kettle-test&#47;${VAR_LOCAL_PROCESS_NAME}&#47;${VAR_LOCAL_TEST_CASE_NAME}&#47;success</filename>
-      <fail_if_file_exists>Y</fail_if_file_exists>
-      <add_filename_result>N</add_filename_result>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>194</xloc>
-      <yloc>1222</yloc>
+      <xloc>185</xloc>
+      <yloc>796</yloc>
       </entry>
     <entry>
       <name>Delete files</name>
@@ -415,23 +281,23 @@
       <include_subfolders>N</include_subfolders>
       <fields>
         <field>
-          <name>${java.io.tmpdir}&#47;kettle-test&#47;${VAR_LOCAL_PROCESS_NAME}&#47;${VAR_LOCAL_TEST_CASE_NAME}</name>
-          <filemask>.*</filemask>
+          <name>&#x24;&#x7b;java.io.tmpdir&#x7d;&#x2f;kettle-test&#x2f;&#x24;&#x7b;VAR_LOCAL_PROCESS_NAME&#x7d;&#x2f;&#x24;&#x7b;VAR_LOCAL_TEST_CASE_NAME&#x7d;</name>
+          <filemask>.&#x2a;</filemask>
         </field>
       </fields>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>198</xloc>
-      <yloc>946</yloc>
+      <xloc>186</xloc>
+      <yloc>698</yloc>
       </entry>
     <entry>
-      <name>Simple evaluation: Is ktr?</name>
+      <name>Simple evaluation&#x3a; Is ktr&#x3f;</name>
       <description/>
       <type>SIMPLE_EVAL</type>
-      <valuetype>field</valuetype>
-      <fieldname>${VAR_PROCESS_TYPE}</fieldname>
-      <variablename/>
+      <valuetype>variable</valuetype>
+      <fieldname>&#x24;&#x7b;VAR_LOCAL_PROCESS_TYPE&#x7d;</fieldname>
+      <variablename>&#x24;&#x7b;VAR_LOCAL_PROCESS_TYPE&#x7d;</variablename>
       <fieldtype>string</fieldtype>
       <mask/>
       <comparevalue>ktr</comparevalue>
@@ -444,8 +310,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>196</xloc>
-      <yloc>809</yloc>
+      <xloc>186</xloc>
+      <yloc>506</yloc>
       </entry>
     <entry>
       <name>Main Job</name>
@@ -453,7 +319,7 @@
       <type>JOB</type>
       <specification_method>filename</specification_method>
       <job_object_id/>
-      <filename>${VAR_PROJECT_ROOT_DIR}&#47;repository&#47;main&#47;${VAR_LOCAL_PROCESS_FILE_NAME}</filename>
+      <filename>&#x24;&#x7b;VAR_PROJECT_ROOT_DIR&#x7d;&#x2f;repository&#x2f;main&#x2f;&#x24;&#x7b;VAR_LOCAL_PROCESS_FILE_NAME&#x7d;</filename>
       <jobname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -467,144 +333,170 @@
       <slave_server_name/>
       <wait_until_finished>Y</wait_until_finished>
       <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
       <create_parent_folder>N</create_parent_folder>
       <pass_export>N</pass_export>
+      <force_separate_logging>N</force_separate_logging>
       <parameters>        <pass_all_parameters>Y</pass_all_parameters>
       </parameters>      <set_append_logfile>N</set_append_logfile>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>272</xloc>
-      <yloc>884</yloc>
+      <xloc>260</xloc>
+      <yloc>636</yloc>
+      </entry>
+    <entry>
+      <name>tr_create_tables.kjb - Input</name>
+      <description/>
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;tr_create_tables.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <force_separate_logging>N</force_separate_logging>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+            <parameter>            <name>VAR_LOCAL_FOLDER</name>
+            <stream_name/>
+            <value>input</value>
+            </parameter>            <parameter>            <name>VAR_LOCAL_INPUT_TABLE_NAME</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;VAR_LOCAL_INPUT_TABLE_NAME&#x7d;</value>
+            </parameter>            <parameter>            <name>VAR_LOCAL_PROCESS_NAME</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;VAR_LOCAL_PROCESS_NAME&#x7d;</value>
+            </parameter>            <parameter>            <name>VAR_LOCAL_PROJECT_INPUT_DB_SCHEMA_NAME</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;VAR_LOCAL_PROJECT_INPUT_DB_SCHEMA_NAME&#x7d;</value>
+            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>186</xloc>
+      <yloc>285</yloc>
+      </entry>
+    <entry>
+      <name>tr_create_tables.kjb - Output</name>
+      <description/>
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;tr_create_tables.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <force_separate_logging>N</force_separate_logging>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+            <parameter>            <name>VAR_LOCAL_FOLDER</name>
+            <stream_name/>
+            <value>output</value>
+            </parameter>            <parameter>            <name>VAR_LOCAL_INPUT_TABLE_NAME</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;VAR_INPUT_TABLE_NAME&#x7d;</value>
+            </parameter>            <parameter>            <name>VAR_LOCAL_PROCESS_NAME</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;VAR_PROCESS_NAME&#x7d;</value>
+            </parameter>            <parameter>            <name>VAR_LOCAL_PROJECT_OUTPUT_DB_SCHEMA_NAME</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;VAR_PROJECT_OUTPUT_DB_SCHEMA_NAME&#x7d;</value>
+            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>186</xloc>
+      <yloc>396</yloc>
+      </entry>
+    <entry>
+      <name>Talend Job Execution</name>
+      <description/>
+      <type>TALEND_JOB_EXEC</type>
+      <filename/>
+      <class_name/>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>379</xloc>
+      <yloc>638</yloc>
+      </entry>
+    <entry>
+      <name>Delete old test case results</name>
+      <description/>
+      <type>DELETE_FILES</type>
+      <arg_from_previous>N</arg_from_previous>
+      <include_subfolders>N</include_subfolders>
+      <fields>
+        <field>
+          <name>&#x24;&#x7b;java.io.tmpdir&#x7d;&#x2f;kettle-test&#x2f;&#x24;&#x7b;VAR_LOCAL_PROCESS_NAME&#x7d;&#x2f;&#x24;&#x7b;VAR_LOCAL_TEST_CASE_NAME&#x7d;</name>
+          <filemask>.&#x2a;</filemask>
+        </field>
+      </fields>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>186</xloc>
+      <yloc>887</yloc>
+      </entry>
+    <entry>
+      <name>jb_compare_output_datasets_master.kjb</name>
+      <description/>
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;jb_compare_output_datasets_master.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <force_separate_logging>N</force_separate_logging>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>186</xloc>
+      <yloc>1003</yloc>
       </entry>
   </entries>
   <hops>
-    <hop>
-      <from>START</from>
-      <to>Set test variables</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>Set test variables</from>
-      <to>Table exists</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Table exists</from>
-      <to>SQL: Drop input table</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Table exists</from>
-      <to>SQL: Create input table</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>SQL: Create input table</from>
-      <to>Output Table exists</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Output Table exists</from>
-      <to>SQL: Drop output table</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Output Table exists</from>
-      <to>SQL: Create output table</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>SQL: Create output table</from>
-      <to>tr_set_test_case_metadata.ktr</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>SQL: Drop input table</from>
-      <to>SQL: Create input table</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>SQL: Drop output table</from>
-      <to>SQL: Create output table</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>tr_set_test_case_metadata.ktr</from>
-      <to>tr_import_input_dataset_metadata_injection.ktr</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>tr_export_output_dataset.ktr</from>
-      <to>File Compare: Output VS Golden Output</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>File Compare: Output VS Golden Output</from>
-      <to>Create success file</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Create success file</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
     <hop>
       <from>Main Transformation</from>
       <to>Delete files</to>
@@ -624,16 +516,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>tr_import_input_dataset_metadata_injection.ktr</from>
-      <to>Simple evaluation: Is ktr?</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Simple evaluation: Is ktr?</from>
+      <from>Simple evaluation&#x3a; Is ktr&#x3f;</from>
       <to>Main Transformation</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -642,7 +525,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Simple evaluation: Is ktr?</from>
+      <from>Simple evaluation&#x3a; Is ktr&#x3f;</from>
       <to>Main Job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -659,74 +542,71 @@
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
+    <hop>
+      <from>tr_create_tables.kjb - Input</from>
+      <to>tr_create_tables.kjb - Output</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>tr_set_test_case_metadata.ktr</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>tr_set_test_case_metadata.ktr</from>
+      <to>tr_create_tables.kjb - Input</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>tr_create_tables.kjb - Output</from>
+      <to>Simple evaluation&#x3a; Is ktr&#x3f;</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>tr_export_output_dataset.ktr</from>
+      <to>Delete old test case results</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Delete old test case results</from>
+      <to>jb_compare_output_datasets_master.kjb</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>jb_compare_output_datasets_master.kjb</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
   </hops>
   <notepads>
-    <notepad>
-      <note>Currently doesn&apos;t work without schema name!</note>
-      <xloc>379</xloc>
-      <yloc>314</yloc>
-      <width>277</width>
-      <heigth>26</heigth>
-      <fontname/>
-      <fontsize>-1</fontsize>
-      <fontbold>N</fontbold>
-      <fontitalic>N</fontitalic>
-      <fontcolorred>0</fontcolorred>
-      <fontcolorgreen>0</fontcolorgreen>
-      <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>165</backgroundcolorgreen>
-      <backgroundcolorblue>0</backgroundcolorblue>
-      <bordercolorred>100</bordercolorred>
-      <bordercolorgreen>100</bordercolorgreen>
-      <bordercolorblue>100</bordercolorblue>
-      <drawshadow>Y</drawshadow>
-    </notepad>
-    <notepad>
-      <note>Disadvantage of file based comparison 
-is that in theory the rows could be 
-outputted by the main transformation
-in any order and hence file based comparison
-would not be able to compare this correctly.</note>
-      <xloc>369</xloc>
-      <yloc>1052</yloc>
-      <width>273</width>
-      <heigth>90</heigth>
-      <fontname/>
-      <fontsize>-1</fontsize>
-      <fontbold>N</fontbold>
-      <fontitalic>N</fontitalic>
-      <fontcolorred>0</fontcolorred>
-      <fontcolorgreen>0</fontcolorgreen>
-      <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>165</backgroundcolorgreen>
-      <backgroundcolorblue>0</backgroundcolorblue>
-      <bordercolorred>100</bordercolorred>
-      <bordercolorgreen>100</bordercolorgreen>
-      <bordercolorblue>100</bordercolorblue>
-      <drawshadow>Y</drawshadow>
-    </notepad>
-    <notepad>
-      <note>Write results details out to db table.</note>
-      <xloc>383</xloc>
-      <yloc>1231</yloc>
-      <width>217</width>
-      <heigth>26</heigth>
-      <fontname/>
-      <fontsize>-1</fontsize>
-      <fontbold>N</fontbold>
-      <fontitalic>N</fontitalic>
-      <fontcolorred>0</fontcolorred>
-      <fontcolorgreen>0</fontcolorgreen>
-      <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>165</backgroundcolorgreen>
-      <backgroundcolorblue>0</backgroundcolorblue>
-      <bordercolorred>100</bordercolorred>
-      <bordercolorgreen>100</bordercolorgreen>
-      <bordercolorblue>100</bordercolorblue>
-      <drawshadow>Y</drawshadow>
-    </notepad>
   </notepads>
+
 </job>
