@@ -141,7 +141,7 @@
     <server/>
     <type>GENERIC</type>
     <access>, </access>
-    <database>&#x24;&#x7b;VAR_JNDI_NAME&#x7d;</database>
+    <database>&#x24;&#x7b;VAR_KTF_JNDI_NAME&#x7d;</database>
     <port>1521</port>
     <username/>
     <password>Encrypted </password>
@@ -232,7 +232,7 @@
     <enclosure>&#x22;</enclosure>
     <header>Y</header>
     <buffer_size>50000</buffer_size>
-    <lazy_conversion>Y</lazy_conversion>
+    <lazy_conversion>N</lazy_conversion>
     <add_filename_result>N</add_filename_result>
     <parallel>N</parallel>
     <newline_possible>N</newline_possible>

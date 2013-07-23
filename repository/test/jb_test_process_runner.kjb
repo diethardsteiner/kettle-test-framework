@@ -17,7 +17,7 @@
     <server/>
     <type>GENERIC</type>
     <access>, </access>
-    <database>&#x24;&#x7b;VAR_JNDI_NAME&#x7d;</database>
+    <database>&#x24;&#x7b;VAR_KTF_JNDI_NAME&#x7d;</database>
     <port>1521</port>
     <username/>
     <password>Encrypted </password>
@@ -153,7 +153,10 @@
       <create_parent_folder>N</create_parent_folder>
       <logging_remote_work>N</logging_remote_work>
       <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
+            <parameter>            <name>VAR_KTR_PROCESS_NAME</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;VAR_KTR_PROCESS_NAME&#x7d;</value>
+            </parameter>      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>230</xloc>
@@ -233,9 +236,6 @@
             </parameter>            <parameter>            <name>VAR_KTF_PROCESS_NAME</name>
             <stream_name/>
             <value>&#x24;&#x7b;VAR_KTF_PROCESS_NAME&#x7d;</value>
-            </parameter>            <parameter>            <name>VAR_KTF_TEST_CASE_NAME</name>
-            <stream_name/>
-            <value>&#x24;&#x7b;VAR_KTF_TEST_CASE_NAME&#x7d;</value>
             </parameter>            <parameter>            <name>VAR_KTF_PROCESS_TYPE</name>
             <stream_name/>
             <value>&#x24;&#x7b;VAR_KTF_PROCESS_TYPE&#x7d;</value>

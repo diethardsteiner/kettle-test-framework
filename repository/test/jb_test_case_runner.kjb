@@ -13,12 +13,12 @@
     <parameters>
         <parameter>
             <name>VAR_KTF_PROCESS_FILE_NAME</name>
-            <default_value>tr_fact_sales.ktr</default_value>
+            <default_value>tr_category_sales.ktr</default_value>
             <description>name of the file to execute</description>
         </parameter>
         <parameter>
             <name>VAR_KTF_PROCESS_NAME</name>
-            <default_value>tr_fact_sales</default_value>
+            <default_value>tr_category_sales</default_value>
             <description>name of the process without file extension</description>
         </parameter>
         <parameter>
@@ -26,28 +26,13 @@
             <default_value>ktr</default_value>
             <description>type of process&#x3a; ktr, kjb</description>
         </parameter>
-        <parameter>
-            <name>VAR_KTF_TEST_CASE_NAME</name>
-            <default_value>simpletest</default_value>
-            <description>name of test case</description>
-        </parameter>
-        <parameter>
-            <name>VAR_PROJECT_INPUT_DB_SCHEMA_NAME</name>
-            <default_value>test</default_value>
-            <description/>
-        </parameter>
-        <parameter>
-            <name>VAR_PROJECT_OUTPUT_DB_SCHEMA_NAME</name>
-            <default_value>test</default_value>
-            <description/>
-        </parameter>
     </parameters>
   <connection>
     <name>project_dynamic_db_connection</name>
     <server/>
     <type>GENERIC</type>
     <access>, </access>
-    <database>&#x24;&#x7b;VAR_JNDI_NAME&#x7d;</database>
+    <database>&#x24;&#x7b;VAR_KTF_JNDI_NAME&#x7d;</database>
     <port>1521</port>
     <username/>
     <password>Encrypted </password>

@@ -99,7 +99,7 @@
     <server/>
     <type>GENERIC</type>
     <access>, </access>
-    <database>&#x24;&#x7b;VAR_JNDI_NAME&#x7d;</database>
+    <database>&#x24;&#x7b;VAR_KTF_JNDI_NAME&#x7d;</database>
     <port>1521</port>
     <username/>
     <password>Encrypted </password>
@@ -176,6 +176,8 @@
   <hop> <from>Golden ds&#x3a; Assign data types</from><to>Output sorted golden ds</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort main output</from><to>Main ds&#x3a; Assign data types</to><enabled>Y</enabled> </hop>
   <hop> <from>Main ds&#x3a; Assign data types</from><to>Output sorted main ds</to><enabled>Y</enabled> </hop>
+  <hop> <from>Generate Rows</from><to>Get Variables</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Variables</from><to>Write to log</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add a checksum</name>
@@ -221,9 +223,9 @@
     <enclosure>&#x22;</enclosure>
     <header>Y</header>
     <buffer_size>50000</buffer_size>
-    <lazy_conversion>Y</lazy_conversion>
+    <lazy_conversion>N</lazy_conversion>
     <add_filename_result>N</add_filename_result>
-    <parallel>N</parallel>
+    <parallel>Y</parallel>
     <newline_possible>N</newline_possible>
     <encoding/>
     <fields>
@@ -232,6 +234,113 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>114</xloc>
       <yloc>222</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Generate Rows</name>
+    <type>RowGenerator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+    </fields>
+    <limit>1</limit>
+    <never_ending>N</never_ending>
+    <interval_in_ms>5000</interval_in_ms>
+    <row_time_field>now</row_time_field>
+    <last_time_field>FiveSecondsAgo</last_time_field>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>102</xloc>
+      <yloc>464</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Variables</name>
+    <type>GetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>folder_name</name>
+        <variable>&#x24;&#x7b;VAR_KTF_FOLDER_NAME&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>process_name</name>
+        <variable>&#x24;&#x7b;VAR_KTF_PROCESS_NAME&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>test_case_name</name>
+        <variable>&#x24;&#x7b;VAR_KTF_TEST_CASE_NAME&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>table_name</name>
+        <variable>&#x24;&#x7b;VAR_KTF_TABLE_NAME&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>full_table_name</name>
+        <variable>&#x24;&#x7b;VAR_KTF_FULL_TABLE_NAME&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>268</xloc>
+      <yloc>464</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -358,7 +467,7 @@
       <name>&#x24;&#x7b;java.io.tmpdir&#x7d;&#x2f;kettle-test&#x2f;&#x24;&#x7b;VAR_KTF_PROCESS_NAME&#x7d;&#x2f;&#x24;&#x7b;VAR_KTF_TEST_CASE_NAME&#x7d;&#x2f;&#x24;&#x7b;VAR_KTF_TABLE_NAME&#x7d;_golden</name>
       <is_command>N</is_command>
       <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
       <extention>csv</extention>
       <append>N</append>
       <split>N</split>
@@ -410,7 +519,7 @@
       <name>&#x24;&#x7b;java.io.tmpdir&#x7d;&#x2f;kettle-test&#x2f;&#x24;&#x7b;VAR_KTF_PROCESS_NAME&#x7d;&#x2f;&#x24;&#x7b;VAR_KTF_TEST_CASE_NAME&#x7d;&#x2f;&#x24;&#x7b;VAR_KTF_TABLE_NAME&#x7d;</name>
       <is_command>N</is_command>
       <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
       <extention>csv</extention>
       <append>N</append>
       <split>N</split>
@@ -486,6 +595,47 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>292</xloc>
       <yloc>79</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Write to log</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+      <limitRows>N</limitRows>
+      <limitRowsNumber>0</limitRowsNumber>
+      <logmessage>&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;</logmessage>
+    <fields>
+      <field>
+        <name>folder_name</name>
+        </field>
+      <field>
+        <name>process_name</name>
+        </field>
+      <field>
+        <name>test_case_name</name>
+        </field>
+      <field>
+        <name>table_name</name>
+        </field>
+      <field>
+        <name>full_table_name</name>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>416</xloc>
+      <yloc>464</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

@@ -1,5 +1,5 @@
 date;category;manager;sales;threshold_reached
-2013/01/01 00:00:00.000;Groceries;Mr James Carrot; 23123;No
-2013/01/02 00:00:00.000;Groceries;Mr James Carrot; 32425;No
-2013/01/01 00:00:00.000;Accessories;Mrs Susi Redcliff; 324;Yes
-2013/01/02 00:00:00.000;Accessories;Mrs Susi Redcliff; 3242;No
+2013-01-01;Accessories;Mrs Susi Redcliff;324;Yes
+2013-01-01;Groceries;Mr James Carrot;23123;No
+2013-01-02;Accessories;Mrs Susi Redcliff;3242;No
+2013-01-02;Groceries;Mr James Carrot;32425;No

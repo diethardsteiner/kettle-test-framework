@@ -77,7 +77,7 @@
     <server/>
     <type>GENERIC</type>
     <access>, </access>
-    <database>&#x24;&#x7b;VAR_JNDI_NAME&#x7d;</database>
+    <database>&#x24;&#x7b;VAR_KTF_JNDI_NAME&#x7d;</database>
     <port>1521</port>
     <username/>
     <password>Encrypted </password>
@@ -171,7 +171,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <filename>&#x2f;home&#x2f;dsteiner&#x2f;Dropbox&#x2f;pentaho&#x2f;Examples&#x2f;PDI&#x2f;testing&#x2f;kettle-test-framework&#x2f;config&#x2f;test-cases&#x2f;tr_category_sales&#x2f;simpletest&#x2f;input&#x2f;sales_by_category.csv</filename>
+    <filename/>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -238,7 +238,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <filename>&#x2f;home&#x2f;dsteiner&#x2f;Dropbox&#x2f;pentaho&#x2f;Examples&#x2f;PDI&#x2f;testing&#x2f;kettle-test-framework&#x2f;config&#x2f;test-cases&#x2f;tr_category_sales&#x2f;simpletest&#x2f;input&#x2f;manager_by_category.csv</filename>
+    <filename/>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -642,7 +642,7 @@
     <fileNameField/>
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>&#x2f;home&#x2f;dsteiner&#x2f;Dropbox&#x2f;pentaho&#x2f;Examples&#x2f;PDI&#x2f;testing&#x2f;kettle-test-framework&#x2f;config&#x2f;test-cases&#x2f;tr_category_sales&#x2f;simpletest&#x2f;output&#x2f;fact_sales_by_category</name>
+      <name/>
       <is_command>N</is_command>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
@@ -754,7 +754,7 @@
     <fileNameField/>
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>&#x2f;home&#x2f;dsteiner&#x2f;Dropbox&#x2f;pentaho&#x2f;Examples&#x2f;PDI&#x2f;testing&#x2f;kettle-test-framework&#x2f;config&#x2f;test-cases&#x2f;tr_category_sales&#x2f;simpletest&#x2f;output&#x2f;agg_sales_by_manager</name>
+      <name/>
       <is_command>N</is_command>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>

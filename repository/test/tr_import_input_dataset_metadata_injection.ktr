@@ -16,12 +16,12 @@
         </parameter>
         <parameter>
             <name>VAR_KTF_PROCESS_NAME</name>
-            <default_value>tr_fact_sales</default_value>
+            <default_value>tr_category_sales</default_value>
             <description/>
         </parameter>
         <parameter>
             <name>VAR_KTF_TABLE_NAME</name>
-            <default_value>sales</default_value>
+            <default_value>sales_by_category</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -119,7 +119,7 @@
     <server/>
     <type>GENERIC</type>
     <access>, </access>
-    <database>&#x24;&#x7b;VAR_JNDI_NAME&#x7d;</database>
+    <database>&#x24;&#x7b;VAR_KTF_JNDI_NAME&#x7d;</database>
     <port>1521</port>
     <username/>
     <password>Encrypted </password>
@@ -205,7 +205,7 @@
            <schema_name/>
            </partitioning>
        <formula><field_name>input_file</field_name>
-<formula_string>project_root_dir &#x2b; &#x22;&#x2f;&#x22; &#x2b; test_config_dir &#x2b; &#x22;&#x2f;&#x22; &#x2b; local_process_name &#x2b; &#x22;&#x2f;&#x22; &#x2b; local_test_case_name &#x2b; &#x22;&#x2f;input&#x2f;&#x22; &#x2b; local_table_name &#x2b; &#x22;.csv&#x22;</formula_string>
+<formula_string>project_root_dir &#x2b; &#x22;&#x2f;&#x22; &#x2b; test_config_dir &#x2b; &#x22;&#x2f;&#x22; &#x2b; process_name &#x2b; &#x22;&#x2f;&#x22; &#x2b; test_case_name &#x2b; &#x22;&#x2f;input&#x2f;&#x22; &#x2b; table_name &#x2b; &#x22;.csv&#x22;</formula_string>
 <value_type>String</value_type>
 <value_length>-1</value_length>
 <value_precision>-1</value_precision>
@@ -249,7 +249,7 @@
         <source_step>Retrieve Schema Definition</source_step>
         <source_field>field_name</source_field>
       </mapping>      <mapping>        <target_step_name>CSV file input</target_step_name>
-        <target_attribute_key>FIELD_LENGTH</target_attribute_key>
+        <target_attribute_key>FIELD_FORMAT</target_attribute_key>
         <target_detail>Y</target_detail>
         <source_step>Retrieve Schema Definition</source_step>
         <source_field>format</source_field>
@@ -384,7 +384,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <filename>&#x24;&#x7b;VAR_PROJECT_ROOT_DIR&#x7d;&#x2f;&#x24;&#x7b;VAR_PROJECT_TEST_CONFIG_DIR&#x7d;&#x2f;&#x24;&#x7b;VAR_PROCESS_NAME&#x7d;&#x2f;input&#x2f;&#x24;&#x7b;VAR_TABLE_NAME&#x7d;.schema.csv</filename>
+    <filename>&#x24;&#x7b;VAR_PROJECT_ROOT_DIR&#x7d;&#x2f;&#x24;&#x7b;VAR_PROJECT_TEST_CONFIG_DIR&#x7d;&#x2f;&#x24;&#x7b;VAR_KTF_PROCESS_NAME&#x7d;&#x2f;input&#x2f;&#x24;&#x7b;VAR_KTF_TABLE_NAME&#x7d;.schema.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
