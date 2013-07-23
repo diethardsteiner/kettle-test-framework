@@ -388,8 +388,8 @@
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
-    <separator>&#x3b;</separator>
-    <enclosure>&#x22;</enclosure>
+    <separator>&#x24;&#x7b;VAR_PROJECT_CSV_DELIMITER&#x7d;</separator>
+    <enclosure>&#x24;&#x7b;VAR_PROJECT_CSV_ENCLOSURE&#x7d;</enclosure>
     <header>N</header>
     <buffer_size>50000</buffer_size>
     <lazy_conversion>Y</lazy_conversion>

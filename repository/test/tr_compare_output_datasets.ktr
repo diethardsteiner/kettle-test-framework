@@ -219,8 +219,8 @@
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
-    <separator>&#x3b;</separator>
-    <enclosure>&#x22;</enclosure>
+    <separator>&#x24;&#x7b;VAR_PROJECT_CSV_DELIMITER&#x7d;</separator>
+    <enclosure>&#x24;&#x7b;VAR_PROJECT_CSV_ENCLOSURE&#x7d;</enclosure>
     <header>Y</header>
     <buffer_size>50000</buffer_size>
     <lazy_conversion>N</lazy_conversion>
@@ -450,8 +450,8 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <separator>&#x3b;</separator>
-    <enclosure>&#x22;</enclosure>
+    <separator>&#x24;&#x7b;VAR_PROJECT_CSV_DELIMITER&#x7d;</separator>
+    <enclosure>&#x24;&#x7b;VAR_PROJECT_CSV_ENCLOSURE&#x7d;</enclosure>
     <enclosure_forced>N</enclosure_forced>
     <enclosure_fix_disabled>N</enclosure_fix_disabled>
     <header>Y</header>
@@ -502,8 +502,8 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <separator>&#x3b;</separator>
-    <enclosure>&#x22;</enclosure>
+    <separator>&#x24;&#x7b;VAR_PROJECT_CSV_DELIMITER&#x7d;</separator>
+    <enclosure>&#x24;&#x7b;VAR_PROJECT_CSV_ENCLOSURE&#x7d;</enclosure>
     <enclosure_forced>N</enclosure_forced>
     <enclosure_fix_disabled>N</enclosure_fix_disabled>
     <header>Y</header>
