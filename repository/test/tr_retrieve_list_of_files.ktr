@@ -10,12 +10,12 @@
     <directory>&#x2f;</directory>
     <parameters>
         <parameter>
-            <name>VAR_LOCAL_FOLDER</name>
+            <name>VAR_KTF_FOLDER_NAME</name>
             <default_value>input</default_value>
             <description/>
         </parameter>
         <parameter>
-            <name>VAR_LOCAL_PROCESS_NAME</name>
+            <name>VAR_KTF_PROCESS_NAME</name>
             <default_value>tr_fact_sales</default_value>
             <description>name of the job&#x2f;transformation without file extension</description>
         </parameter>
@@ -112,7 +112,7 @@
     <server/>
     <type>GENERIC</type>
     <access>, </access>
-    <database>&#x24;&#x7b;VAR_PROJECT_INPUT_JNDI_NAME&#x7d;</database>
+    <database>project_input_db_connection</database>
     <port>1521</port>
     <username/>
     <password>Encrypted </password>
@@ -124,8 +124,10 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
       <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
@@ -134,7 +136,7 @@
     <server/>
     <type>GENERIC</type>
     <access>, </access>
-    <database>&#x24;&#x7b;VAR_PROJECT_OUTPUT_JNDI_NAME&#x7d;</database>
+    <database>project_output_db_connection</database>
     <port>1521</port>
     <username/>
     <password>Encrypted </password>
@@ -146,8 +148,10 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
       <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
@@ -202,7 +206,7 @@
     <dynamic_include_subfolders>N</dynamic_include_subfolders>
     <limit>0</limit>
     <file>
-      <name>&#x24;&#x7b;VAR_PROJECT_ROOT_DIR&#x7d;&#x2f;config&#x2f;test-cases&#x2f;&#x24;&#x7b;VAR_LOCAL_PROCESS_NAME&#x7d;&#x2f;&#x24;&#x7b;VAR_LOCAL_FOLDER&#x7d;</name>
+      <name>&#x24;&#x7b;VAR_PROJECT_ROOT_DIR&#x7d;&#x2f;&#x24;&#x7b;VAR_PROJECT_TEST_CONFIG_DIR&#x7d;&#x2f;&#x24;&#x7b;VAR_KTF_PROCESS_NAME&#x7d;&#x2f;&#x24;&#x7b;VAR_KTF_FOLDER_NAME&#x7d;</name>
       <filemask>.&#x2a;</filemask>
       <exclude_filemask/>
       <file_required>N</file_required>

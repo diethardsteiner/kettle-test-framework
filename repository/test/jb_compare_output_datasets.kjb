@@ -4,12 +4,28 @@
     <description/>
     <extended_description/>
     <job_version/>
+    <job_status>0</job_status>
   <directory>&#x2f;</directory>
   <created_user>-</created_user>
   <created_date>2013&#x2f;07&#x2f;21 14&#x3a;12&#x3a;05.400</created_date>
   <modified_user>-</modified_user>
   <modified_date>2013&#x2f;07&#x2f;21 14&#x3a;12&#x3a;05.400</modified_date>
     <parameters>
+        <parameter>
+            <name>VAR_KTF_FOLDER_NAME</name>
+            <default_value>output</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>VAR_KTF_PROCESS_NAME</name>
+            <default_value>tr_fact_sales</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>VAR_KTF_TEST_CASE_NAME</name>
+            <default_value>simpletest</default_value>
+            <description/>
+        </parameter>
     </parameters>
   <connection>
     <name>project_dynamic_db_connection</name>
@@ -40,7 +56,7 @@
     <server/>
     <type>GENERIC</type>
     <access>, </access>
-    <database>&#x24;&#x7b;VAR_PROJECT_INPUT_JNDI_NAME&#x7d;</database>
+    <database>project_input_db_connection</database>
     <port>1521</port>
     <username/>
     <password>Encrypted </password>
@@ -52,8 +68,10 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
       <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
@@ -62,7 +80,7 @@
     <server/>
     <type>GENERIC</type>
     <access>, </access>
-    <database>&#x24;&#x7b;VAR_PROJECT_OUTPUT_JNDI_NAME&#x7d;</database>
+    <database>project_output_db_connection</database>
     <port>1521</port>
     <username/>
     <password>Encrypted </password>
@@ -74,8 +92,10 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
       <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
@@ -105,8 +125,8 @@
       <name>File Compare&#x3a; Output VS Golden Output</name>
       <description/>
       <type>FILE_COMPARE</type>
-      <filename1>&#x24;&#x7b;java.io.tmpdir&#x7d;&#x2f;kettle-test&#x2f;&#x24;&#x7b;VAR_LOCAL_PROCESS_NAME&#x7d;&#x2f;&#x24;&#x7b;VAR_LOCAL_TEST_CASE_NAME&#x7d;&#x2f;&#x24;&#x7b;VAR_TABLE_NAME&#x7d;_golden.csv</filename1>
-      <filename2>&#x24;&#x7b;java.io.tmpdir&#x7d;&#x2f;kettle-test&#x2f;&#x24;&#x7b;VAR_LOCAL_PROCESS_NAME&#x7d;&#x2f;&#x24;&#x7b;VAR_LOCAL_TEST_CASE_NAME&#x7d;&#x2f;&#x24;&#x7b;VAR_TABLE_NAME&#x7d;.csv</filename2>
+      <filename1>&#x24;&#x7b;java.io.tmpdir&#x7d;&#x2f;kettle-test&#x2f;&#x24;&#x7b;VAR_KTF_PROCESS_NAME&#x7d;&#x2f;&#x24;&#x7b;VAR_KTF_TEST_CASE_NAME&#x7d;&#x2f;&#x24;&#x7b;VAR_KTF_TABLE_NAME&#x7d;_golden.csv</filename1>
+      <filename2>&#x24;&#x7b;java.io.tmpdir&#x7d;&#x2f;kettle-test&#x2f;&#x24;&#x7b;VAR_KTF_PROCESS_NAME&#x7d;&#x2f;&#x24;&#x7b;VAR_KTF_TEST_CASE_NAME&#x7d;&#x2f;&#x24;&#x7b;VAR_KTF_TABLE_NAME&#x7d;.csv</filename2>
       <add_filename_result>N</add_filename_result>
       <parallel>N</parallel>
       <draw>Y</draw>
@@ -118,7 +138,7 @@
       <name>Create success file</name>
       <description/>
       <type>CREATE_FILE</type>
-      <filename>&#x24;&#x7b;java.io.tmpdir&#x7d;&#x2f;kettle-test&#x2f;&#x24;&#x7b;VAR_LOCAL_PROCESS_NAME&#x7d;&#x2f;&#x24;&#x7b;VAR_LOCAL_TEST_CASE_NAME&#x7d;&#x2f;&#x24;&#x7b;VAR_TABLE_NAME&#x7d;.success</filename>
+      <filename>&#x24;&#x7b;java.io.tmpdir&#x7d;&#x2f;kettle-test&#x2f;&#x24;&#x7b;VAR_KTF_PROCESS_NAME&#x7d;&#x2f;&#x24;&#x7b;VAR_KTF_TEST_CASE_NAME&#x7d;&#x2f;&#x24;&#x7b;VAR_KTF_TABLE_NAME&#x7d;.success</filename>
       <fail_if_file_exists>Y</fail_if_file_exists>
       <add_filename_result>N</add_filename_result>
       <parallel>N</parallel>
@@ -174,21 +194,21 @@
       <create_parent_folder>N</create_parent_folder>
       <logging_remote_work>N</logging_remote_work>
       <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-            <parameter>            <name>VAR_LOCAL_FOLDER</name>
+            <parameter>            <name>VAR_KTF_FULL_TABLE_NAME</name>
             <stream_name/>
-            <value>&#x24;&#x7b;VAR_LOCAL_FOLDER&#x7d;</value>
-            </parameter>            <parameter>            <name>VAR_LOCAL_FULL_TABLE_NAME</name>
+            <value>&#x24;&#x7b;VAR_KTF_FULL_TABLE_NAME&#x7d;</value>
+            </parameter>            <parameter>            <name>VAR_KTF_FOLDER_NAME</name>
             <stream_name/>
-            <value>&#x24;&#x7b;VAR_FULL_TABLE_NAME&#x7d;</value>
-            </parameter>            <parameter>            <name>VAR_LOCAL_TABLE_NAME</name>
+            <value>&#x24;&#x7b;VAR_KTF_FOLDER_NAME&#x7d;</value>
+            </parameter>            <parameter>            <name>VAR_KTF_PROCESS_NAME</name>
             <stream_name/>
-            <value>&#x24;&#x7b;VAR_TABLE_NAME&#x7d;</value>
-            </parameter>            <parameter>            <name>VAR_LOCAL_PROCESS_NAME</name>
+            <value>&#x24;&#x7b;VAR_KTF_PROCESS_NAME&#x7d;</value>
+            </parameter>            <parameter>            <name>VAR_KTF_TEST_CASE_NAME</name>
             <stream_name/>
-            <value>&#x24;&#x7b;VAR_LOCAL_PROCESS_NAME&#x7d;</value>
-            </parameter>            <parameter>            <name>VAR_LOCAL_TEST_CASE_NAME</name>
+            <value>&#x24;&#x7b;VAR_KTF_TEST_CASE_NAME&#x7d;</value>
+            </parameter>            <parameter>            <name>VAR_KTF_TABLE_NAME</name>
             <stream_name/>
-            <value>&#x24;&#x7b;VAR_LOCAL_TEST_CASEN_NAME&#x7d;</value>
+            <value>&#x24;&#x7b;VAR_KTF_TABLE_NAME&#x7d;</value>
             </parameter>      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -209,7 +229,7 @@
       <name>Create error file</name>
       <description/>
       <type>CREATE_FILE</type>
-      <filename>&#x24;&#x7b;java.io.tmpdir&#x7d;&#x2f;kettle-test&#x2f;&#x24;&#x7b;VAR_LOCAL_PROCESS_NAME&#x7d;&#x2f;&#x24;&#x7b;VAR_LOCAL_TEST_CASE_NAME&#x7d;&#x2f;&#x24;&#x7b;VAR_TABLE_NAME&#x7d;.error</filename>
+      <filename>&#x24;&#x7b;java.io.tmpdir&#x7d;&#x2f;kettle-test&#x2f;&#x24;&#x7b;VAR_KTF_PROCESS_NAME&#x7d;&#x2f;&#x24;&#x7b;VAR_KTF_TEST_CASE_NAME&#x7d;&#x2f;&#x24;&#x7b;VAR_KTF_TABLE_NAME&#x7d;.error</filename>
       <fail_if_file_exists>Y</fail_if_file_exists>
       <add_filename_result>N</add_filename_result>
       <parallel>N</parallel>
@@ -318,27 +338,6 @@
     </hop>
   </hops>
   <notepads>
-    <notepad>
-      <note>ToDo&#x3a; Here and in all linked processes&#xa;- Define Parameters&#xa;- Complete settings</note>
-      <xloc>443</xloc>
-      <yloc>62</yloc>
-      <width>235</width>
-      <heigth>58</heigth>
-      <fontname>Arial</fontname>
-      <fontsize>10</fontsize>
-      <fontbold>N</fontbold>
-      <fontitalic>N</fontitalic>
-      <fontcolorred>0</fontcolorred>
-      <fontcolorgreen>0</fontcolorgreen>
-      <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>165</backgroundcolorgreen>
-      <backgroundcolorblue>0</backgroundcolorblue>
-      <bordercolorred>100</bordercolorred>
-      <bordercolorgreen>100</bordercolorgreen>
-      <bordercolorblue>100</bordercolorblue>
-      <drawshadow>Y</drawshadow>
-    </notepad>
     <notepad>
       <note>ToDo&#x3a; Write results details out to db table.</note>
       <xloc>467</xloc>

@@ -10,27 +10,27 @@
     <directory>&#x2f;</directory>
     <parameters>
         <parameter>
-            <name>VAR_LOCAL_FOLDER</name>
+            <name>VAR_KTF_FOLDER_NAME</name>
             <default_value>output</default_value>
             <description/>
         </parameter>
         <parameter>
-            <name>VAR_LOCAL_FULL_TABLE_NAME</name>
-            <default_value>test.tr_fact_sales</default_value>
-            <description>table name with schema</description>
+            <name>VAR_KTF_FULL_TABLE_NAME</name>
+            <default_value>test.fact_sales</default_value>
+            <description/>
         </parameter>
         <parameter>
-            <name>VAR_LOCAL_PROCESS_NAME</name>
+            <name>VAR_KTF_PROCESS_NAME</name>
             <default_value>tr_fact_sales</default_value>
             <description/>
         </parameter>
         <parameter>
-            <name>VAR_LOCAL_TABLE_NAME</name>
+            <name>VAR_KTF_TABLE_NAME</name>
             <default_value>fact_sales</default_value>
             <description/>
         </parameter>
         <parameter>
-            <name>VAR_LOCAL_TEST_CASE_NAME</name>
+            <name>VAR_KTF_TEST_CASE_NAME</name>
             <default_value>simpletest</default_value>
             <description/>
         </parameter>
@@ -127,7 +127,7 @@
     <server/>
     <type>GENERIC</type>
     <access>, </access>
-    <database>&#x24;&#x7b;VAR_PROJECT_INPUT_JNDI_NAME&#x7d;</database>
+    <database>project_input_db_connection</database>
     <port>1521</port>
     <username/>
     <password>Encrypted </password>
@@ -139,8 +139,10 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
       <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
@@ -149,7 +151,7 @@
     <server/>
     <type>GENERIC</type>
     <access>, </access>
-    <database>&#x24;&#x7b;VAR_PROJECT_OUTPUT_JNDI_NAME&#x7d;</database>
+    <database>project_output_db_connection</database>
     <port>1521</port>
     <username/>
     <password>Encrypted </password>
@@ -161,13 +163,20 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
       <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
   <order>
-  <hop> <from>CSV file input&#x3a; Sort order</from><to>ETL Metadata Injection</to><enabled>Y</enabled> </hop>
+  <hop> <from>CSV file input&#x3a; Sort order</from><to>Metadata Join</to><enabled>Y</enabled> </hop>
+  <hop> <from>Metadata Join</from><to>ETL Metadata Injection</to><enabled>Y</enabled> </hop>
+  <hop> <from>Generate Rows</from><to>Metadata Join</to><enabled>Y</enabled> </hop>
+  <hop> <from>Retrieve Schema Definition</from><to>Metadata Join Schema</to><enabled>Y</enabled> </hop>
+  <hop> <from>Metadata Join Schema</from><to>ETL Metadata Injection</to><enabled>Y</enabled> </hop>
+  <hop> <from>Generate Rows 2</from><to>Metadata Join Schema</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>CSV file input&#x3a; Sort order</name>
@@ -180,11 +189,11 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <filename>&#x24;&#x7b;VAR_PROJECT_ROOT_DIR&#x7d;&#x2f;config&#x2f;test-cases&#x2f;&#x24;&#x7b;VAR_LOCAL_PROCESS_NAME&#x7d;&#x2f;&#x24;&#x7b;VAR_LOCAL_FOLDER&#x7d;&#x2f;&#x24;&#x7b;VAR_LOCAL_TABLE_NAME&#x7d;.sort.csv</filename>
+    <filename>&#x24;&#x7b;VAR_PROJECT_ROOT_DIR&#x7d;&#x2f;config&#x2f;test-cases&#x2f;&#x24;&#x7b;VAR_LOCAL_PROCESS_NAME&#x7d;&#x2f;&#x24;&#x7b;VAR_LOCAL_FOLDER&#x7d;&#x2f;&#x24;&#x7b;VAR_TABLE_NAME&#x7d;.sort.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
-    <separator>,</separator>
+    <separator>&#x3b;</separator>
     <enclosure>&#x22;</enclosure>
     <header>N</header>
     <buffer_size>50000</buffer_size>
@@ -195,7 +204,7 @@
     <encoding/>
     <fields>
       <field>
-        <name>sort_order</name>
+        <name>sort_order_field</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -232,16 +241,308 @@
     <directory_path/>
     <source_step/>
     <target_file/>
-    <no_execution>N</no_execution>
-    <mappings>      <mapping>        <target_step_name>Sort golden dataset</target_step_name>
+    <no_execution>Y</no_execution>
+    <mappings>      <mapping>        <target_step_name>Sort main output</target_step_name>
+        <target_attribute_key>IGNORE_CASE</target_attribute_key>
+        <target_detail>Y</target_detail>
+        <source_step>Metadata Join</source_step>
+        <source_field>sort_ignore_case</source_field>
+      </mapping>      <mapping>        <target_step_name>Sort golden dataset</target_step_name>
+        <target_attribute_key>SORT_ASCENDING</target_attribute_key>
+        <target_detail>Y</target_detail>
+        <source_step>Metadata Join</source_step>
+        <source_field>sort_order_asc</source_field>
+      </mapping>      <mapping>        <target_step_name>Golden ds&#x3a; Assign data types</target_step_name>
+        <target_attribute_key>META_TYPE</target_attribute_key>
+        <target_detail>Y</target_detail>
+        <source_step>Metadata Join Schema</source_step>
+        <source_field>data_type</source_field>
+      </mapping>      <mapping>        <target_step_name>Sort main output</target_step_name>
         <target_attribute_key>NAME</target_attribute_key>
         <target_detail>Y</target_detail>
-        <source_step>CSV file input&#x3a; Sort order</source_step>
-        <source_field>sort_order</source_field>
+        <source_step>Metadata Join</source_step>
+        <source_field>sort_order_field</source_field>
+      </mapping>      <mapping>        <target_step_name>Main ds&#x3a; Assign data types</target_step_name>
+        <target_attribute_key>META_TYPE</target_attribute_key>
+        <target_detail>Y</target_detail>
+        <source_step>Metadata Join Schema</source_step>
+        <source_field>data_type</source_field>
+      </mapping>      <mapping>        <target_step_name>CSV file input golden ds</target_step_name>
+        <target_attribute_key>FIELD_TRIM_TYPE</target_attribute_key>
+        <target_detail>Y</target_detail>
+        <source_step>Metadata Join Schema</source_step>
+        <source_field>trim_type</source_field>
+      </mapping>      <mapping>        <target_step_name>CSV file input golden ds</target_step_name>
+        <target_attribute_key>FIELD_NAME</target_attribute_key>
+        <target_detail>Y</target_detail>
+        <source_step>Metadata Join Schema</source_step>
+        <source_field>field_name</source_field>
+      </mapping>      <mapping>        <target_step_name>CSV file input golden ds</target_step_name>
+        <target_attribute_key>FIELD_FORMAT</target_attribute_key>
+        <target_detail>Y</target_detail>
+        <source_step>Metadata Join Schema</source_step>
+        <source_field>format</source_field>
+      </mapping>      <mapping>        <target_step_name>Main ds&#x3a; Assign data types</target_step_name>
+        <target_attribute_key>META_CONVERSION_MASK</target_attribute_key>
+        <target_detail>Y</target_detail>
+        <source_step>Metadata Join Schema</source_step>
+        <source_field>format</source_field>
+      </mapping>      <mapping>        <target_step_name>Sort golden dataset</target_step_name>
+        <target_attribute_key>IGNORE_CASE</target_attribute_key>
+        <target_detail>Y</target_detail>
+        <source_step>Metadata Join</source_step>
+        <source_field>sort_ignore_case</source_field>
+      </mapping>      <mapping>        <target_step_name>Sort main output</target_step_name>
+        <target_attribute_key>SORT_ASCENDING</target_attribute_key>
+        <target_detail>Y</target_detail>
+        <source_step>Metadata Join</source_step>
+        <source_field>sort_order_asc</source_field>
+      </mapping>      <mapping>        <target_step_name>Golden ds&#x3a; Assign data types</target_step_name>
+        <target_attribute_key>META_NAME</target_attribute_key>
+        <target_detail>Y</target_detail>
+        <source_step>Metadata Join Schema</source_step>
+        <source_field>field_name</source_field>
+      </mapping>      <mapping>        <target_step_name>CSV file input golden ds</target_step_name>
+        <target_attribute_key>FIELD_TYPE</target_attribute_key>
+        <target_detail>Y</target_detail>
+        <source_step>Metadata Join Schema</source_step>
+        <source_field>data_type</source_field>
+      </mapping>      <mapping>        <target_step_name>Sort golden dataset</target_step_name>
+        <target_attribute_key>NAME</target_attribute_key>
+        <target_detail>Y</target_detail>
+        <source_step>Metadata Join</source_step>
+        <source_field>sort_order_field</source_field>
+      </mapping>      <mapping>        <target_step_name>Golden ds&#x3a; Assign data types</target_step_name>
+        <target_attribute_key>META_CONVERSION_MASK</target_attribute_key>
+        <target_detail>Y</target_detail>
+        <source_step>Metadata Join Schema</source_step>
+        <source_field>format</source_field>
+      </mapping>      <mapping>        <target_step_name>Main ds&#x3a; Assign data types</target_step_name>
+        <target_attribute_key>META_NAME</target_attribute_key>
+        <target_detail>Y</target_detail>
+        <source_step>Metadata Join Schema</source_step>
+        <source_field>field_name</source_field>
       </mapping>    </mappings>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>347</xloc>
+      <xloc>546</xloc>
       <yloc>118</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Generate Rows</name>
+    <type>RowGenerator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>sort_order_asc</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Y</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>sort_ignore_case</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>N</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <limit>1</limit>
+    <never_ending>N</never_ending>
+    <interval_in_ms/>
+    <row_time_field/>
+    <last_time_field/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>227</xloc>
+      <yloc>17</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Generate Rows 2</name>
+    <type>RowGenerator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>trim_type</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>both</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <limit>1</limit>
+    <never_ending>N</never_ending>
+    <interval_in_ms/>
+    <row_time_field/>
+    <last_time_field/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>541</xloc>
+      <yloc>276</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Metadata Join</name>
+    <type>JoinRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <cache_size>500</cache_size>
+      <main/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue/>
+ <function>&#x3d;</function>
+ <rightvalue/>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>308</xloc>
+      <yloc>118</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Metadata Join Schema</name>
+    <type>JoinRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <cache_size>500</cache_size>
+      <main/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue/>
+ <function>&#x3d;</function>
+ <rightvalue/>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>445</xloc>
+      <yloc>199</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Retrieve Schema Definition</name>
+    <type>CsvInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <filename>&#x24;&#x7b;VAR_PROJECT_ROOT_DIR&#x7d;&#x2f;config&#x2f;test-cases&#x2f;&#x24;&#x7b;VAR_LOCAL_PROCESS_NAME&#x7d;&#x2f;&#x24;&#x7b;VAR_LOCAL_FOLDER&#x7d;&#x2f;&#x24;&#x7b;VAR_TABLE_NAME&#x7d;.schema.csv</filename>
+    <filename_field/>
+    <rownum_field/>
+    <include_filename>N</include_filename>
+    <separator>&#x3b;</separator>
+    <enclosure>&#x22;</enclosure>
+    <header>N</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>Y</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <encoding/>
+    <fields>
+      <field>
+        <name>field_name</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>data_type</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>format</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>348</xloc>
+      <yloc>274</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

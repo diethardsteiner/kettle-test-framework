@@ -1,0 +1,4 @@
+date;Date;yyyy-MM-dd
+category;String
+manager;String
+sales;Integer;#

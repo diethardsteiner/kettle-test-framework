@@ -165,7 +165,7 @@
     <server/>
     <type>GENERIC</type>
     <access>, </access>
-    <database>&#x24;&#x7b;VAR_PROJECT_INPUT_JNDI_NAME&#x7d;</database>
+    <database>project_input_db_connection</database>
     <port>1521</port>
     <username/>
     <password>Encrypted </password>
@@ -177,8 +177,10 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
       <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
@@ -187,7 +189,7 @@
     <server/>
     <type>GENERIC</type>
     <access>, </access>
-    <database>&#x24;&#x7b;VAR_PROJECT_OUTPUT_JNDI_NAME&#x7d;</database>
+    <database>project_output_db_connection</database>
     <port>1521</port>
     <username/>
     <password>Encrypted </password>
@@ -199,8 +201,10 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
       <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
@@ -283,7 +287,7 @@
     <fields>
       <field>
         <name>db_schema_name</name>
-        <variable>&#x24;&#x7b;VAR_LOCAL_DB_SCHEMA_NAME&#x7d;</variable>
+        <variable>&#x24;&#x7b;VAR_KTF_DB_SCHEMA_NAME&#x7d;</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -295,7 +299,7 @@
       </field>
       <field>
         <name>jndi_name</name>
-        <variable>&#x24;&#x7b;VAR_JNDI_NAME&#x7d;</variable>
+        <variable>&#x24;&#x7b;VAR_KTF_JNDI_NAME&#x7d;</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -307,7 +311,7 @@
       </field>
       <field>
         <name>table_name</name>
-        <variable>&#x24;&#x7b;VAR_LOCAL_TABLE_NAME&#x7d;</variable>
+        <variable>&#x24;&#x7b;VAR_KTF_TABLE_NAME&#x7d;</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -338,8 +342,8 @@
            <schema_name/>
            </partitioning>
     <connection>project_dynamic_db_connection</connection>
-    <schema>&#x24;&#x7b;VAR_LOCAL_DB_SCHEMA_NAME&#x7d;</schema>
-    <table>&#x24;&#x7b;VAR_LOCAL_TABLE_NAME&#x7d;</table>
+    <schema>&#x24;&#x7b;VAR_KTF_DB_SCHEMA_NAME&#x7d;</schema>
+    <table>&#x24;&#x7b;VAR_KTF_TABLE_NAME&#x7d;</table>
     <commit>1000</commit>
     <truncate>Y</truncate>
     <ignore_errors>N</ignore_errors>

@@ -1,0 +1,3 @@
+date;Date;yyyy-MM-dd
+category;String
+sales;Integer;#

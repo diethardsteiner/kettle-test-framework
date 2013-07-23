@@ -78,7 +78,7 @@
     <server/>
     <type>GENERIC</type>
     <access>, </access>
-    <database>&#x24;&#x7b;VAR_JNDI_NAME&#x7d;</database>
+    <database>&#x24;&#x7b;VAR_KTF_JNDI_NAME&#x7d;</database>
     <port>1521</port>
     <username/>
     <password>Encrypted </password>
@@ -102,7 +102,7 @@
     <server/>
     <type>GENERIC</type>
     <access>, </access>
-    <database>&#x24;&#x7b;VAR_PROJECT_INPUT_JNDI_NAME&#x7d;</database>
+    <database>project_input_db_connection</database>
     <port>1521</port>
     <username/>
     <password>Encrypted </password>
@@ -114,8 +114,10 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
       <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
@@ -124,7 +126,7 @@
     <server/>
     <type>GENERIC</type>
     <access>, </access>
-    <database>&#x24;&#x7b;VAR_PROJECT_OUTPUT_JNDI_NAME&#x7d;</database>
+    <database>project_output_db_connection</database>
     <port>1521</port>
     <username/>
     <password>Encrypted </password>
@@ -136,8 +138,10 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
       <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
@@ -189,7 +193,7 @@
     <fields>
       <field>
         <name>local_folder</name>
-        <variable>&#x24;&#x7b;VAR_LOCAL_FOLDER&#x7d;</variable>
+        <variable>&#x24;&#x7b;VAR_KTF_FOLDER_NAME&#x7d;</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -308,37 +312,37 @@
     <fields>
       <field>
         <field_name>table</field_name>
-        <variable_name>VAR_TABLE_NAME</variable_name>
+        <variable_name>VAR_KTF_TABLE_NAME</variable_name>
         <variable_type>PARENT_JOB</variable_type>
         <default_value/>
         </field>
       <field>
         <field_name>csv</field_name>
-        <variable_name>VAR_DATA_CSV_FILE_NAME</variable_name>
+        <variable_name>VAR_KTF_DATA_CSV_FILE_NAME</variable_name>
         <variable_type>PARENT_JOB</variable_type>
         <default_value/>
         </field>
       <field>
         <field_name>ddl</field_name>
-        <variable_name>VAR_DDL_FILE_NAME</variable_name>
+        <variable_name>VAR_KTF_DDL_FILE_NAME</variable_name>
         <variable_type>PARENT_JOB</variable_type>
         <default_value/>
         </field>
       <field>
         <field_name>db_schema_name</field_name>
-        <variable_name>VAR_DB_SCHEMA_NAME</variable_name>
+        <variable_name>VAR_KTF_DB_SCHEMA_NAME</variable_name>
         <variable_type>PARENT_JOB</variable_type>
         <default_value/>
         </field>
       <field>
         <field_name>full_table_name</field_name>
-        <variable_name>VAR_FULL_TABLE_NAME</variable_name>
+        <variable_name>VAR_KTF_FULL_TABLE_NAME</variable_name>
         <variable_type>PARENT_JOB</variable_type>
         <default_value/>
         </field>
       <field>
         <field_name>jndi_name</field_name>
-        <variable_name>VAR_JNDI_NAME</variable_name>
+        <variable_name>VAR_KTF_JNDI_NAME</variable_name>
         <variable_type>PARENT_JOB</variable_type>
         <default_value/>
         </field>
